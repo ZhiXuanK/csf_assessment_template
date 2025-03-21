@@ -1,65 +1,47 @@
 <div class="row mt-3">
   <div class="col d-flex justify-content-between align-items-center">
-    <div class="fs-1 fw-bold text-primary">Menu ($XXX)</div>
+    <div class="fs-1 fw-bold text-primary">Menu (${{totalPrice$ | async}})</div>
     <div>
-      <button type="button" class="btn btn-primary">
-        Place Order (XXX)
+      <button type="button" class="btn btn-primary" [disabled]="disabled" (click)="placeOrder()">
+        Place Order ({{cartCount$ | async}})
       </button>
     </div>
   </div>
 </div>
 
-<!-- each row display a single mene item -->
-<div class="row mb-2">
-  <div class="col">
-    <div class="menu-item">
-      <div>
-        <button type="button" class="btn btn-warning">
-          <i class="bi bi-x-square"></i>
-        </button>
-      </div>
-      <div class="menu-details">
-        <div>Name: <span class="fw-bold"> XXX </span> </div>
-        <div>Description:
-          <span class="fst-italic">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-          </span>
-        </div>
-        <div></div>
-          <div class="text-danger fw-bold">Quantity: XXX</div>
-      </div>
-      <div class="menu-button-end">
-        <button type="button" class="btn btn-success">
-          <i class="bi bi-plus-circle"></i>
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
+@for (item of menuItems$ | async; track item){
 
-<div class="row mb-2">
-  <div class="col">
-    <div class="menu-item">
-      <div>
-        <button type="button" class="btn btn-warning">
-          <i class="bi bi-x-square"></i>
-        </button>
-      </div>
-      <div class="menu-details">
-        <div>Name: <span class="fw-bold"> XXX </span> </div>
-        <div>Description:
-          <span class="fst-italic">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-          </span>
+  <div class="row mb-2">
+    <div class="col">
+      <div class="menu-item">
+        <div>
+          <button type="button" class="btn btn-warning" (click)="deleteOneItem(item)">
+            <i class="bi bi-x-square"></i>
+          </button>
         </div>
-        <div></div>
-          <div class="text-danger fw-bold">Quantity: XXX</div>
-      </div>
-      <div class="menu-button-end">
-        <button type="button" class="btn btn-success">
-          <i class="bi bi-plus-circle"></i>
-        </button>
+        <div class="menu-details">
+          <div>Name: <span class="fw-bold"> {{item.name}} </span> </div>
+          <div>Description:
+            <span class="fst-italic">
+              {{item.description}}
+            </span>
+          </div>
+          <div>Price:
+            <span class="fst-italic">
+              {{item.price}}
+            </span>
+          </div>
+          @if(countIndivItem(item) != 0){
+            <div class="text-danger fw-bold">Quantity: {{countIndivItem(item)}}</div>
+          }
+        </div>
+        <div class="menu-button-end">
+          <button type="button" class="btn btn-success" (click)="addOneItem(item)">
+            <i class="bi bi-plus-circle"></i>
+          </button>
+        </div>
       </div>
     </div>
   </div>
-</div>
+
+}

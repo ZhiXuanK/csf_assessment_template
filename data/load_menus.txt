@@ -1,1 +1,3 @@
 # TODO: Task 1.1
+
+mongoimport --uri="mongodb://mongo:lvjHdrxTIXyuGGeBmcZDuaLKKkplQJBl@yamanote.proxy.rlwy.net:14340/?authSource=admin" --username=mongo --password="lvjHdrxTIXyuGGeBmcZDuaLKKkplQJBl" --db=restaurant --collection=menus --type=json --jsonArray --file=menus.json

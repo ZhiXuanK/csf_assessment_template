@@ -9,15 +9,33 @@ import { MenuComponent } from './components/menu.component';
 import { PlaceOrderComponent } from './components/place-order.component';
 
 import { ConfirmationComponent } from './components/confirmation.component';
+import { RouterModule, Routes } from '@angular/router';
+import { RestaurantService } from './restaurant.service';
+import { CartStore } from './cart.store';
+
+const appRoutes: Routes = [
+  { path: '', component: MenuComponent },
+  { path: 'order', component:PlaceOrderComponent },
+  { path: '**', component:MenuComponent }
+]
 
 @NgModule({
   declarations: [
-    AppComponent, MenuComponent, PlaceOrderComponent, ConfirmationComponent
+    AppComponent, 
+    MenuComponent, 
+    PlaceOrderComponent, 
+    ConfirmationComponent
   ],
   imports: [
-    BrowserModule, ReactiveFormsModule
+    BrowserModule, 
+    ReactiveFormsModule,
+    RouterModule.forRoot(appRoutes)
   ],
-  providers: [ provideHttpClient() ],
+  providers: [ 
+    provideHttpClient(),
+    RestaurantService,
+    CartStore
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
