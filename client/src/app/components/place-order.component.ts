@@ -68,6 +68,17 @@ export class PlaceOrderComponent implements OnInit{
 
   processForm(){
     console.log(this.userForm.value)
+    const order = {
+      username: this.userForm.value.username,
+      password: this.userForm.value.password,
+      items: this.cartItems.map(item => ({
+        id: item.id,
+        price: item.price,
+        quantity: this.cart.filter(i => i === item).length
+      }))
+    }
+    console.log(order)
+    this.restSvc.postOrder(order).subscribe()
   }
 
 

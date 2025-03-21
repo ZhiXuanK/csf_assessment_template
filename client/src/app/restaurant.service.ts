@@ -18,4 +18,7 @@ export class RestaurantService {
   }
 
   // TODO: Task 3.2
+  postOrder(order:any): Observable<any>{
+    return this.http.post('/api/food_order', order)
+  }
 }
