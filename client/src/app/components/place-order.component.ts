@@ -59,7 +59,7 @@ export class PlaceOrderComponent implements OnInit{
   }
 
   getTotalPrice(price:number, quantity:number){
-    const totalPrice = (price*quantity).toFixed(2)
+    const totalPrice = (price*quantity)
     //this.cartPrice = this.cartPrice + totalPrice
     return totalPrice
   }

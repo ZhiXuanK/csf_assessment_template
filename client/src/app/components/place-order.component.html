@@ -47,9 +47,9 @@
         </tr>
       </thead>
       <tbody>
-        @for( c of cartItems; track c){
+        @for( c of cartItems; let idx=$index; track c){
           <tr>
-            <td></td>
+            <td>{{idx}}</td>
             <td>
               {{ c.name }}
             </td>

@@ -122,6 +122,7 @@ public class RestaurantService {
       Document toInsert = new Document()
         .append("_id", receipt.getOrder_id())
         .append("order_id", receipt.getOrder_id())
+        .append("payment_id", receipt.getPayment_id())
         .append("username", order.getString("username"))
         .append("total", totalPrice)
         .append("timestamp", new Date(receipt.getTimestamp()))

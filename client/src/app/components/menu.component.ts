@@ -22,14 +22,15 @@ export class MenuComponent implements OnInit{
   totalPrice$ !: Observable<number>
   cartCount$ !: Observable<number>
 
-  totalPrice !: string
+  //totalPrice !: string
 
   cartItem !: MenuItem[]
   disabled !: boolean
 
   ngOnInit():void{
     this.menuItems$ = this.restSvc.getMenuItems()
-    firstValueFrom(this.cartStore.getTotalPrice).then(res => this.totalPrice=res.toFixed(2))
+    this.totalPrice$ = this.cartStore.getTotalPrice
+    //firstValueFrom(this.cartStore.getTotalPrice).then(res => this.totalPrice=res.toFixed(2))
     this.cartCount$ = this.cartStore.countItemsInCart
     this.cartStore.getItems.subscribe(
       res => {
