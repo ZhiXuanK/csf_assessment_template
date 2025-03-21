@@ -55,7 +55,21 @@ public class OrdersRepository {
 
   // TODO: Task 4
   // Write the native MongoDB query for your access methods in the comment below
-  //
+  // db.orders.insert({
+  //     _id: "abcd1234",
+  //     order_id: "abcd1234",
+  //     payment_id: "xyz789",
+  //     username: "fred",
+  //     total: 23.10,
+  //     timestamp: new Date(03/03/03),
+  //     items: [
+  //         {id: "xxx", price: 7.70, quantity: 2},
+  //         {id: "yyy", price: 8.80, quantity: 3}
+  //     ]
+  // });
   //  Native MongoDB query here
-  
+  public void insertOrder(Document document){
+    mongoTemplate.insert(document, "orders");
+  }
+
 }

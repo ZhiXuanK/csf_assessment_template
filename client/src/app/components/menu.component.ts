@@ -1,7 +1,7 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { RestaurantService } from '../restaurant.service';
 import { MenuItem } from '../models';
-import { Observable } from 'rxjs';
+import { firstValueFrom, map, Observable } from 'rxjs';
 import { CartStore } from '../cart.store';
 import { Router } from '@angular/router';
 
@@ -22,12 +22,14 @@ export class MenuComponent implements OnInit{
   totalPrice$ !: Observable<number>
   cartCount$ !: Observable<number>
 
+  totalPrice !: string
+
   cartItem !: MenuItem[]
   disabled !: boolean
 
   ngOnInit():void{
     this.menuItems$ = this.restSvc.getMenuItems()
-    this.totalPrice$ = this.cartStore.getTotalPrice
+    firstValueFrom(this.cartStore.getTotalPrice).then(res => this.totalPrice=res.toFixed(2))
     this.cartCount$ = this.cartStore.countItemsInCart
     this.cartStore.getItems.subscribe(
       res => {

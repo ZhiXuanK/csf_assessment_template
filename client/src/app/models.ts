@@ -20,3 +20,10 @@ export interface LineItem {
     quantity: number
     totalPrice: number
 }
+
+export interface PaymentReceipt {
+    orderId: string
+    paymentId: string
+    total: number
+    timestamp: number
+}

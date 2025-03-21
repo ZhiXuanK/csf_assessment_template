@@ -12,10 +12,12 @@ import { ConfirmationComponent } from './components/confirmation.component';
 import { RouterModule, Routes } from '@angular/router';
 import { RestaurantService } from './restaurant.service';
 import { CartStore } from './cart.store';
+import { DatePipe } from '@angular/common';
 
 const appRoutes: Routes = [
   { path: '', component: MenuComponent },
   { path: 'order', component:PlaceOrderComponent },
+  { path: 'confirm', component:ConfirmationComponent },
   { path: '**', component:MenuComponent }
 ]
 
@@ -34,7 +36,8 @@ const appRoutes: Routes = [
   providers: [ 
     provideHttpClient(),
     RestaurantService,
-    CartStore
+    CartStore,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

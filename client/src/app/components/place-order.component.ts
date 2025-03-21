@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CartStore } from '../cart.store';
@@ -41,6 +41,8 @@ export class PlaceOrderComponent implements OnInit{
     this.totalPrice$ = this.cartStore.getTotalPrice
   }
 
+
+
   // formLineItem(item:MenuItem):LineItem{
   //   const qty = this.cart.filter(i => i === item).length
   //   return {
@@ -57,7 +59,7 @@ export class PlaceOrderComponent implements OnInit{
   }
 
   getTotalPrice(price:number, quantity:number){
-    const totalPrice = price*quantity
+    const totalPrice = (price*quantity).toFixed(2)
     //this.cartPrice = this.cartPrice + totalPrice
     return totalPrice
   }
@@ -67,7 +69,6 @@ export class PlaceOrderComponent implements OnInit{
   }
 
   processForm(){
-    console.log(this.userForm.value)
     const order = {
       username: this.userForm.value.username,
       password: this.userForm.value.password,
@@ -77,8 +78,14 @@ export class PlaceOrderComponent implements OnInit{
         quantity: this.cart.filter(i => i === item).length
       }))
     }
-    console.log(order)
-    this.restSvc.postOrder(order).subscribe()
+    this.restSvc.postOrder(order).subscribe({
+      next: (data) => {
+        console.log(data)
+        this.restSvc.orderDetails = data
+        this.router.navigate(['/confirm'])
+      },
+      error: (err) => alert(err.error.message)
+    })
   }
 
 
